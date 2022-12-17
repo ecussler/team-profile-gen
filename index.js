@@ -55,7 +55,7 @@ const internQs = [
     }
 ]
 
-const addAnother = [
+const addAnotherQs = [
     {
         type: 'confirm',
         name: 'addAnother',
@@ -92,12 +92,15 @@ function init() {
             initIntern(); 
         }
         console.log(response); 
-    });
-
-    inquirer.prompt(addAnother)
-    .then((response) => 
-        response ? init() : console.log("Your team profile has been generated!")
-    )
+    }).then(addAnother()); 
 }
+
+function addAnother() {
+    inquirer.prompt(addAnotherQs)
+    .then((response) => 
+    response ? init() : console.log("Your team profile has been generated!")
+)
+}
+
 
 init(); 
