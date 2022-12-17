@@ -8,35 +8,30 @@ const intern = require('./lib/Intern');
 
 const addNewQs = [
     {
-        type: 'confirm',
-        name: 'addAnother',
-        message: 'Would you like to add another team member?'
-    }, 
-    {
         type: 'list', 
         name: 'typeAdd', 
         message: 'What type of team member would you like to add?', 
-        choices: ['Manger', 'Engineer', 'Intern']
-    }
-]
-
-const managerQs = [
+        choices: ['Manager', 'Engineer', 'Intern']
+    },
     {
         type: 'input', 
-        name: 'managerName', 
-        message: `What is your manager's name?`
+        name: 'name', 
+        message: `What is your the employee's name?`
     }, 
     {
         type: 'number', 
-        name: 'managerID', 
+        name: 'id', 
         message: 'What is their ID number?', 
     }, 
     {
         type: 'input', 
-        name: 'managerEmail', 
+        name: 'email', 
         message: 'What is their email address?', 
         default: 'email@email.com'
     }, 
+]
+
+const managerQs = [
     {
         type: 'number', 
         name: 'managerOffice', 
@@ -47,22 +42,6 @@ const managerQs = [
 const engineerQs = [
     {
         type: 'input', 
-        name: 'engineerName', 
-        message: `What is your engineer's name?`
-    }, 
-    {
-        type: 'number', 
-        name: 'engineerID', 
-        message: 'What is their ID number?', 
-    }, 
-    {
-        type: 'input', 
-        name: 'engineerEmail', 
-        message: 'What is their email address?', 
-        default: 'email@email.com'
-    }, 
-    {
-        type: 'input', 
         name: 'github', 
         message: 'What is their GitHub username?'
     }
@@ -71,25 +50,17 @@ const engineerQs = [
 const internQs = [
     {
         type: 'input', 
-        name: 'internName', 
-        message: `What is your intern's name?`
-    }, 
-    {
-        type: 'number', 
-        name: 'internID', 
-        message: 'What is their ID number?', 
-    }, 
-    {
-        type: 'input', 
-        name: 'internEmail', 
-        message: 'What is their email address?', 
-        default: 'email@email.com'
-    },   
-    {
-        type: 'input', 
         name: 'school', 
         message: 'What school does your intern attend?'
     }
+]
+
+const addAnother = [
+    {
+        type: 'confirm',
+        name: 'addAnother',
+        message: 'Would you like to add another team member?'
+    }, 
 ]
 
 function initManager(){
@@ -112,8 +83,21 @@ function initIntern() {
 
 function init() {
     inquirer.prompt(addNewQs)
-    .then((response) =>
-    console.log(response)); 
+    .then((response) => {
+        if (response.typeAdd == "Manager") {
+            initManager();
+        } else if (response.typeAdd == "Engineer") {
+            initEngineer(); 
+        } else {
+            initIntern(); 
+        }
+        console.log(response); 
+    });
+
+    inquirer.prompt(addAnother)
+    .then((response) => 
+        response ? init() : console.log("Your team profile has been generated!")
+    )
 }
 
 init(); 
