@@ -2,13 +2,13 @@
 const fs = require('fs'); 
 const inquirer = require('inquirer'); 
 inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer)); 
+
+// Linked pages
 const Employee = require('./lib/Employee'); 
-// const manager = require('./lib/Manager'); 
-// const engineer = require('./lib/Engineer'); 
 const Intern = require('./lib/Intern'); 
-const render = require('./src/render'); 
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
+const renderCards = require('./src/cards'); 
 // const HTML = require('./dist/index.html'); 
 
 const questions = [
