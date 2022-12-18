@@ -1,106 +1,108 @@
 // Packages needed to run the application. 
 const fs = require('fs'); 
 const inquirer = require('inquirer'); 
+inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer)); 
 const employee = require('./lib/Employee'); 
 const manager = require('./lib/Manager'); 
 const engineer = require('./lib/Engineer'); 
 const intern = require('./lib/Intern'); 
+const render = require('./src/render'); 
+// const HTML = require('./dist/index.html'); 
 
 const addNewQs = [
     {
-        type: 'list', 
-        name: 'typeAdd', 
-        message: 'What type of team member would you like to add?', 
-        choices: ['Manager', 'Engineer', 'Intern']
-    },
-    {
         type: 'input', 
-        name: 'name', 
-        message: `What is your the employee's name?`
+        name: 'manager-name', 
+        message: `What is your the manager's name?`
     }, 
     {
         type: 'number', 
-        name: 'id', 
+        name: 'manager-id', 
         message: 'What is their ID number?', 
     }, 
     {
         type: 'input', 
-        name: 'email', 
+        name: 'manager-email', 
         message: 'What is their email address?', 
         default: 'email@email.com'
     }, 
-]
-
-const managerQs = [
     {
         type: 'number', 
-        name: 'managerOffice', 
+        name: 'manager-office', 
         message: 'What is their office number?'
+    },
+    {
+        type: 'loop',
+        name: 'add-employees', 
+        message: 'Would you like to add another employee?',
+        questions: [
+            {
+                type: 'list', 
+                name: 'type', 
+                message: 'What type of team member would you like to add?', 
+                choices: ['Engineer', 'Intern'] 
+            }, 
+            {
+                type: 'input', 
+                name: 'name', 
+                message: `What is your the employee's name?`
+            }, 
+            {
+                type: 'number', 
+                name: 'id', 
+                message: 'What is their ID number?', 
+            }, 
+            {
+                type: 'input', 
+                name: 'email', 
+                message: 'What is their email address?', 
+                default: 'email@email.com'
+            }, 
+            {
+                type: 'input', 
+                name: 'github', 
+                message: 'What is their GitHub username?',
+                when: (employee) => employee.type === "Engineer"
+            },
+            {
+                type: 'input', 
+                name: 'school', 
+                message: 'What school does your intern attend?', 
+                when: (employee) => employee.type === "Intern"  
+            },
+        ]
     }
 ]
 
-const engineerQs = [
-    {
-        type: 'input', 
-        name: 'github', 
-        message: 'What is their GitHub username?'
-    }
-]
 
-const internQs = [
-    {
-        type: 'input', 
-        name: 'school', 
-        message: 'What school does your intern attend?'
-    }
-]
+const employees = [];
 
-const addAnotherQs = [
-    {
-        type: 'confirm',
-        name: 'addAnother',
-        message: 'Would you like to add another team member?'
-    }, 
-]
+// function initManager(){
+//     inquirer.prompt(managerQs)
+//     .then((response) =>
+//     console.log(response)); 
+// }
 
-function initManager(){
-    inquirer.prompt(managerQs)
-    .then((response) =>
-    console.log(response)); 
-}
+// function initEngineer(){
+//     inquirer.prompt(engineerQs)
+//     .then((response) =>
+//     console.log(response)); 
+// }
 
-function initEngineer(){
-    inquirer.prompt(engineerQs)
-    .then((response) =>
-    console.log(response)); 
-}
-
-function initIntern() {
-    inquirer.prompt(internQs)
-    .then((response) =>
-    console.log(response)); 
-}
+// function initIntern() {
+//     inquirer.prompt(internQs)
+//     .then((response) =>
+//     console.log(response)); 
+// }
 
 function init() {
     inquirer.prompt(addNewQs)
     .then((response) => {
-        if (response.typeAdd == "Manager") {
-            initManager();
-        } else if (response.typeAdd == "Engineer") {
-            initEngineer(); 
-        } else {
-            initIntern(); 
-        }
         console.log(response); 
-    }).then(addAnother()); 
+    })
 }
 
-function addAnother() {
-    inquirer.prompt(addAnotherQs)
-    .then((response) => 
-    response ? init() : console.log("Your team profile has been generated!")
-)
-}
+
 
 
 init(); 
