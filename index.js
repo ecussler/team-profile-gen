@@ -3,14 +3,17 @@ const fs = require('fs');
 const inquirer = require('inquirer'); 
 inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer)); 
 
-// Linked pages
-const Employee = require('./lib/Employee'); 
+// Linked class libraries
 const Intern = require('./lib/Intern'); 
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const renderCards = require('./src/cards'); 
-// const HTML = require('./dist/index.html'); 
 
+// Linked src to render cards and HTML 
+const {renderManager, renderEngineer, renderIntern} = require('./src/cards');
+const render HTML = require('./src/html'); 
+
+
+// Inquirer questions
 const questions = [
     {
         type: 'input', 
