@@ -1,4 +1,4 @@
-function renderHTML(renderManager, renderEngineer, renderIntern) {
+function renderHTML(managerCard, engineerCards, internCards) {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -13,12 +13,12 @@ function renderHTML(renderManager, renderEngineer, renderIntern) {
       <div class="header">
           <h1>My Team</h1>
       </div>
-      ${renderManager}
-      ${renderEngineer}
-      ${renderIntern}
+      ${managerCard}
+      ${engineerCards}
+      ${internCards}
       <script src="index.js"></script>
     </body>
   </html>`
 }
 
-module.exports = renderHTML(); 
+module.exports = renderHTML; 
