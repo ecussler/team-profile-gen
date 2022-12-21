@@ -101,7 +101,7 @@ function init() {
             }
         }
         
-        // Rendering employee cards
+        // Rendering employee card
         const managerCard = renderManager(manager); 
         const engineerCards = engineers.map(engineer => renderEngineer(engineer)).join(''); 
         const internCards = interns.map(intern => renderIntern(intern)).join('');

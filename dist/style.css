@@ -1,0 +1,12 @@
+.header {
+    margin: 20px; 
+    padding: 20px; 
+    border-radius: 5px;
+    text-align: center;
+    color: #3b6064; 
+    background-color: #c9e4ca;
+}
+
+.card {
+    margin: 20px; 
+}
