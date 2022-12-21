@@ -1,4 +1,3 @@
-// const index = require('../index'); 
 
 function renderManager(manager) {
     return `<div class="card card-body" >

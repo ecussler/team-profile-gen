@@ -83,13 +83,12 @@ const questions = [
 function init() {
     inquirer.prompt(questions)
     .then((response) => {
-        console.log(response); 
-        // console.log(response.addEmployees)
         const manager = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOffice); 
         const employeesArr = response.addEmployees; 
         const engineers = []; 
         const interns = []; 
 
+        // Inquirer loop creates array, this for loop runs through those objects and splits them into an engineer and intern array
         for (let i = 0; i < employeesArr.length; i++) {
             const employee = employeesArr[i]; 
             if (employee.type === "Engineer") {
@@ -102,6 +101,7 @@ function init() {
             }
         }
         
+        // Rendering employee cards
         const managerCard = renderManager(manager); 
         const engineerCards = engineers.map(engineer => renderEngineer(engineer)).join(''); 
         const internCards = interns.map(intern => renderIntern(intern)).join('');

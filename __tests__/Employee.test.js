@@ -1,7 +1,6 @@
-const { exportAllDeclaration } = require('@babel/types');
 const Employee = require('../lib/Employee');
 
-test('Can instantiates a new employee instance', () => {
+test('Instantiates a new employee instance', () => {
     const employee = new Employee('Bob', 4, 'email@gmail.com'); 
     expect(typeof employee).toBe('object');  
 })
@@ -26,17 +25,17 @@ test('can get name by calling getName()', () => {
     expect(employee.getName()).toBe('Bob');  
 })
 
-test('can get name by calling getID()', () => {
+test('can get id by calling getID()', () => {
     const employee = new Employee('Bob', 4, 'email@gmail.com'); 
     expect(employee.getID()).toBe(4);  
 })
 
-test('can get name by calling getEmail()', () => {
+test('can get email by calling getEmail()', () => {
     const employee = new Employee('Bob', 4, 'email@gmail.com'); 
     expect(employee.getEmail()).toBe('email@gmail.com');  
 })
 
-test('can get name by calling getRole()', () => {
+test('can get role by calling getRole()', () => {
     const employee = new Employee('Bob', 4, 'email@gmail.com'); 
     expect(employee.getRole()).toBe('Bob is an Employee of the company.');  
 })
