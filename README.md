@@ -30,7 +30,8 @@ Program using Node.js to generate a team profile page.
   This app uses inquirer to generate the prompts (npm start) and jest (npm test) to run testing. Please see the demonstration video below: 
 
 
-  ![Application Sample](https://youtu.be/FVnWTCnFnQU)
+  ![Application Sample](https://user-images.githubusercontent.com/114117233/208823389-8e4c5dc2-c5d1-4384-b983-be868db2c0c4.mov)
+
 
 
   ## Contribution
